@@ -22,30 +22,24 @@ import { ListNode } from "./2.add-two-numbers";
 type Node = ListNode | null | undefined;
 
 function addTwoNumbers(l1: Node, l2: Node): ListNode {
-  const getSum = (n1 = 0, n2 = 0, complement = 0) => {
-    const number = n1 + n2 + complement;
-    return [number % 10, number >= 10 ? 1 : 0];
-  };
-  const [fval, fcomplement] = getSum(l1?.val, l2?.val);
-  const head = new ListNode(fval);
+  const head = new ListNode(0);
 
   let pivot = head;
-  let complement = fcomplement;
-  l1 = l1?.next || null;
-  l2 = l2?.next || null;
+  let complement = 0;
 
-  while (l1 || l2 || complement) {
-    const [val, residual] = getSum(l1?.val, l2?.val, complement);
-    pivot.next = new ListNode(val);
+  while ((l1 && l2) || complement) {
+    const sum = (l1?.val || 0) + (l2?.val || 0) + complement || 0;
+    pivot.next = new ListNode(sum % 10);
     pivot = pivot.next;
     l1 = l1?.next || null;
     l2 = l2?.next || null;
-    complement = residual;
+    complement = sum > 9 ? 1 : 0;
   }
-  pivot.next = l1 != null ? l1 : l2;
+  pivot.next = l1 != null ? l1 : l2 || null;
 
-  return head;
+  return head.next as ListNode;
 }
+
 // @lc code=end
 
 export { addTwoNumbers };
