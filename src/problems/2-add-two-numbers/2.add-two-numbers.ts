@@ -30,7 +30,7 @@ type Node = ListNode | null | undefined;
 
 const getSum = (n1?: Node, n2?: Node, complement = 0) => {
   const number = (n1?.val || 0) + (n2?.val || 0) + complement;
-  return { val: number % 10, residual: number >= 10 ? 1 : 0 };
+  return [number % 10, number >= 10 ? 1 : 0];
 };
 
 function addTwoNumbers(l1: Node, l2: Node): ListNode {
@@ -40,13 +40,13 @@ function addTwoNumbers(l1: Node, l2: Node): ListNode {
         lastNode.next = new ListNode(complement);
       return;
     }
-    const { val, residual } = getSum(n1, n2, complement);
+    const [val, residual] = getSum(n1, n2, complement);
     lastNode.next = new ListNode(val);
     sumNodes(n1?.next || null, n2?.next || null, residual, lastNode.next);
   };
-  const firstSum = getSum(l1, l2);
-  const head = new ListNode(firstSum.val);
-  sumNodes(l1?.next, l2?.next, firstSum.residual, head);
+  const [val, residual] = getSum(l1, l2);
+  const head = new ListNode(val);
+  sumNodes(l1?.next, l2?.next, residual, head);
   return head;
 }
 // @lc code=end
