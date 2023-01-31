@@ -11,6 +11,7 @@
 // Output: [8,9,9,9,0,0,0,1]
 
 import { addTwoNumbers, ListNode } from "./2.add-two-numbers";
+import { addTwoNumbers as addTwoNumbersIterative } from "./2.add-two-numbers|iterative";
 
 const arr2List = (arr: number[]) => {
   const firstNode = new ListNode(arr[0]);
@@ -35,6 +36,27 @@ describe("given tests", () => {
   test("given tests 3", () => {
     expect(
       addTwoNumbers(arr2List([9, 9, 9, 9, 9, 9, 9]), arr2List([9, 9, 9, 9]))
+    ).toStrictEqual(arr2List([8, 9, 9, 9, 0, 0, 0, 1]));
+  });
+});
+
+describe("given tests | iterative", () => {
+  test("given tests 1", () => {
+    expect(
+      addTwoNumbersIterative(arr2List([2, 4, 3]), arr2List([5, 6, 4]))
+    ).toStrictEqual(arr2List([7, 0, 8]));
+  });
+  test("given tests 2", () => {
+    expect(addTwoNumbersIterative(arr2List([0]), arr2List([0]))).toStrictEqual(
+      arr2List([0])
+    );
+  });
+  test("given tests 3", () => {
+    expect(
+      addTwoNumbersIterative(
+        arr2List([9, 9, 9, 9, 9, 9, 9]),
+        arr2List([9, 9, 9, 9])
+      )
     ).toStrictEqual(arr2List([8, 9, 9, 9, 0, 0, 0, 1]));
   });
 });
