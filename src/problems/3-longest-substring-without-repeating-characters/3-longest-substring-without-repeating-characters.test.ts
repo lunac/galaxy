@@ -10,6 +10,6 @@ describe("given tests", () => {
     expect(lengthOfLongestSubstring("pwwkew")).toEqual(3);
   });
   test("given tests 4", () => {
-    expect(lengthOfLongestSubstring("au")).toEqual(3);
+    expect(lengthOfLongestSubstring("au")).toEqual(2);
   });
 });

@@ -7,23 +7,24 @@
 // @lc code=start
 function lengthOfLongestSubstring(s: string): number {
   if (s.length <= 1) return s.length;
-  let pivot = 0,
-    max = 0,
-    look = 0;
+  let count = 0,
+    start = 0,
+    max = 0;
   const map = new Map();
-  while (look < s.length) {
-    const char = s.charAt(look);
+  for (let i = 0; i < s.length; i++) {
+    const char = s.charAt(i);
     if (map.has(char)) {
-      max = Math.max(map.size, max);
-      map.clear();
-      pivot++;
-      look = pivot;
+      const bottom = Math.max(map.get(char), start);
+      max = Math.max(count, max);
+      count = i - bottom;
+      start = bottom;
+      map.set(char, i);
     } else {
-      map.set(char, true);
-      look++;
+      map.set(char, i);
+      count++;
     }
   }
-  return Math.max(map.size, max);
+  return Math.max(count, max);
 }
 // @lc code=end
 
